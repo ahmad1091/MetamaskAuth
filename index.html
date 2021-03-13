@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MetaMaskAuth</title>
-</head>
-<body>
-    
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://npmcdn.com/moralis@0.0.6/dist/moralis.js"></script>
+  </head>
+  <body>
+    <script>
+      Moralis.initialize("<id>"); //Application id from moralis.io
+      Moralis.serverURL("<url>"); //server url from moralis.io
+      const login = async () => {
+        console.log("clicked");
+        var user = await Moralis.Web3.authenticate();
+        if (user) {
+          console.log(user);
+          user.set("nickname", "VITALIK");
+          user.set("fav_color", "blue");
+          user.save();
+        }
+      };
+    </script>
+
+    <button type="button" onclick="login()">MetaMask singin</button>
+  </body>
 </html>
